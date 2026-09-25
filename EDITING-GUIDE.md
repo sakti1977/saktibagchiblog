@@ -4,16 +4,15 @@ The new site uses Astro for the public website and Pages CMS for browser-based e
 
 ## Setup status
 
-The local website builds successfully and GitHub write access is confirmed. Pages CMS authorization and an end-to-end publish test are still required. Do not treat the editor as connected until that test is completed.
+The local website builds successfully, GitHub write access is confirmed, and Pages CMS is connected to `sakti1977/saktibagchiblog` on `main`. Imported posts open in its visual editor with their original permanent URLs, categories, tags, search titles, HTML article text, and publication dates intact.
 
 ## One-time connection
 
 1. GitHub repository access has been confirmed for sakti1977/saktibagchiblog.
-2. Push the reviewed source and .pages.yml configuration to that repository.
-3. For private drafts, make the repository private before saving unpublished material. The draft switch hides content from the website, not from GitHub.
-4. Sign in at https://app.pagescms.org/ using GitHub. Grant the Pages CMS app access only to this repository. This authorization must be completed by the account owner.
-5. Select the repository and main branch. Confirm that Blog posts, Website pages, Homepage and navigation, and Media appear.
-6. Connect Railway to main, deploy to a temporary Railway address, and run one create/draft/publish/edit/unpublish test before relying on it.
+2. The reviewed source and `.pages.yml` configuration are already on `main`.
+3. Pages CMS is authorized and configured. The Blog posts collection is ready to use.
+4. For private drafts, make the repository private before saving unpublished material. The draft switch hides content from the website, not from GitHub.
+5. Railway automatically deploys each saved GitHub commit. Run one create/draft/publish/edit/unpublish test before relying on it for routine publishing.
 
 ## Write a post
 
