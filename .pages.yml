@@ -26,8 +26,10 @@ content:
         label: Publication date
         type: date
         required: true
+        default: ""
         options:
           time: true
+          format: "yyyy-MM-dd'T'HH:mm:ssXXX"
       - name: path
         label: Permanent web address
         type: string
