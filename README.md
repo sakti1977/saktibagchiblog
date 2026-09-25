@@ -4,7 +4,7 @@ Astro replacement for https://saktibagchi.in with Pages CMS configuration for vi
 
 ## Current state
 
-452 posts and 9 pages imported; all 461 main-sitemap URLs reconciled. Local build succeeds. 460 media files downloaded. Two large, unreferenced legacy videos need separate archival storage. GitHub write access is verified. Railway preview deployment is being prepared; DNS is unchanged.
+452 posts and 9 pages imported; all 461 main-sitemap URLs reconciled. Local build succeeds and validation passes across 1,990 content/archive routes. 460 referenced media files have been copied. Two large, unreferenced legacy videos need separate archival storage. The site is published to GitHub and Railway has built a non-indexed preview at https://saktibagchi-blog-production.up.railway.app; public HTTPS accessibility still needs confirmation. DNS is unchanged.
 
 ## Develop
 
@@ -27,7 +27,7 @@ See EDITING-GUIDE.md for the browser workflow and setup limitations. The public 
 
 `npm test` checks generated routes, titles, descriptions, canonicals, media, internal links and runtime HTTP behavior. It fails if a referenced local media file is missing. `node scripts/test-editor.mjs` tests draft exclusion, publishing, sanitization, topic assignment and duplicate permalink rejection.
 
-Reports are in `reports/`. All 1,993 content/archive routes passed output and SEO checks at the last validation. The build also includes management and 404 pages. Re-run validation after each content or media change.
+Reports are in `reports/`. All 1,990 content/archive routes passed output and SEO checks at the last validation. The build also includes management and 404 pages. Re-run validation after each content or media change.
 
 ## Railway
 
