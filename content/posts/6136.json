@@ -1,0 +1,23 @@
+{
+  "id": 6136,
+  "kind": "post",
+  "path": "/2026/02/14/build-a-python-coding-agent-in-30-minutes/",
+  "title": "Build a Python Coding Agent in 30 Minutes",
+  "seoTitle": "Build a Python Coding Agent in 30 Minutes – Life as Sakti",
+  "description": "I built a Python Coding Agent from scratch this weekend. Here's the full playbook. You type: \"Create a function that analyzes a list of numbers.\"It returns: Working, production-ready Python code. In 3 seconds. Here's how I did it — and how you can replicate it in 30 minutes: ⚡ THE STACK (Surprisingly Simple) Python 3.9+…",
+  "canonical": "https://saktibagchi.in/2026/02/14/build-a-python-coding-agent-in-30-minutes/",
+  "date": "2026-02-14T12:36:17Z",
+  "modified": "2026-09-23T18:40:41Z",
+  "dateLabel": "14 February 2026",
+  "image": "",
+  "html": "\n<p class=\"wp-block-paragraph\"></p>\n\n\n\n<figure class=\"wp-block-image size-full\"><a href=\"/wp-content/uploads/2026/02/my-first-python-coding-agent.png\"><img loading=\"lazy\" width=\"1024\" height=\"768\" src=\"/wp-content/uploads/2026/02/my-first-python-coding-agent.png\" alt=\"\" class=\"wp-image-6138\" /></a></figure>\n\n\n\n<p class=\"wp-block-paragraph\">I built a Python Coding Agent from scratch this weekend. </p>\n\n\n\n<p class=\"wp-block-paragraph\">Here’s the full playbook.</p>\n\n\n\n<p class=\"wp-block-paragraph\">You type: “Create a function that analyzes a list of numbers.”<br />It returns: Working, production-ready Python code. In 3 seconds.</p>\n\n\n\n<p class=\"wp-block-paragraph\">Here’s how I did it — and how you can replicate it in 30 minutes:</p>\n\n\n\n<hr class=\"wp-block-separator has-alpha-channel-opacity\" />\n\n\n\n<p class=\"wp-block-paragraph\">⚡ THE STACK (Surprisingly Simple)</p>\n\n\n\n<ul class=\"wp-block-list\">\n<li>Python 3.9+</li>\n\n\n\n<li>anthropic library (the Claude API SDK)</li>\n\n\n\n<li>python-dotenv (for API key safety)</li>\n\n\n\n<li>That’s literally it.</li>\n</ul>\n\n\n\n<hr class=\"wp-block-separator has-alpha-channel-opacity\" />\n\n\n\n<p class=\"wp-block-paragraph\">🔑 5 STEPS TO BUILD IT:</p>\n\n\n\n<p class=\"wp-block-paragraph\">1️⃣ Get your Anthropic API key from console.anthropic.com<br />→ Use Claude Haiku for cost efficiency (~$0.001 per generation)</p>\n\n\n\n<p class=\"wp-block-paragraph\">2️⃣ Install dependencies<br />→ pip install anthropic python-dotenv</p>\n\n\n\n<p class=\"wp-block-paragraph\">3️⃣ Write a system prompt (the agent’s “brain”)<br />→ “You are an expert Python developer. Write clean, well-commented code with error handling.”</p>\n\n\n\n<p class=\"wp-block-paragraph\">4️⃣ Build the core generate_code() function<br />→ Sends your requirement to Claude → Extracts the code block → Saves to output folder</p>\n\n\n\n<p class=\"wp-block-paragraph\">5️⃣ Add exponential backoff retry logic<br />→ Handles API overloads gracefully (Error 529 is real — I hit it on Day 1!)</p>\n\n\n\n<hr class=\"wp-block-separator has-alpha-channel-opacity\" />\n\n\n\n<p class=\"wp-block-paragraph\">💰 COST REALITY CHECK</p>\n\n\n\n<ul class=\"wp-block-list\">\n<li>100 code generations/day = ~₹10/day</li>\n\n\n\n<li>Claude Haiku: $0.25/million input tokens</li>\n\n\n\n<li>One code generation: ~$0.001</li>\n</ul>\n\n\n\n<p class=\"wp-block-paragraph\">This is the most cost-effective AI tool I’ve built.</p>\n\n\n\n<hr class=\"wp-block-separator has-alpha-channel-opacity\" />\n\n\n\n<p class=\"wp-block-paragraph\">🎁 BONUS FEATURES I added:<br />✅ Conversation memory — refine code iteratively<br />✅ Model switching — Haiku for speed, Sonnet for complexity<br />✅ Cost tracker — shows token usage after every call<br />✅ Auto-save — generated code saved to /output folder</p>\n\n\n\n<hr class=\"wp-block-separator has-alpha-channel-opacity\" />\n\n\n\n<p class=\"wp-block-paragraph\">Full open source code 👇<br />🔗 github.com/sakti1977/PythonAgent</p>\n\n\n\n<p class=\"wp-block-paragraph\">Star the repo if this was useful. I have made it a public repo. Feel free to find issues, suggest enhancements or optimize.</p>\n\n\n\n<p class=\"wp-block-paragraph\"></p>\n",
+  "categories": [
+    786497120
+  ],
+  "tags": [],
+  "categoryNames": [
+    "AI & Technology"
+  ],
+  "draft": false,
+  "tagNames": []
+}

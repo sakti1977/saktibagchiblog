@@ -1,0 +1,13 @@
+import fs from 'node:fs/promises';
+import {load} from 'cheerio';
+const read=async n=>JSON.parse((await fs.readFile(`source/wordpress/${n}.json`,'utf8')).replace(/^\uFEFF/,''));
+const records=[...await read('posts'),...await read('pages')];
+const $=load(await fs.readFile('source/wordpress/sitemap-1.xml','utf8'),{xmlMode:true});
+const urls=$('url > loc').map((_,e)=>$(e).text()).get();
+const normalize=u=>decodeURI(new URL(u).pathname).toLowerCase();
+const expected=new Set(records.map(r=>normalize(r.link)));
+const missing=urls.filter(u=>!expected.has(normalize(u)));
+const result={sitemapUrls:urls.length,exportedContent:records.length,missingFromExport:missing};
+await fs.writeFile('reports/sitemap-reconciliation.json',JSON.stringify(result,null,2));console.log(result);
+const lock=JSON.parse(await fs.readFile('package-lock.json','utf8'));console.log('Astro',lock.packages['node_modules/astro'].version);
+const packageJson=JSON.parse(await fs.readFile('package.json','utf8'));for(const name of Object.keys(packageJson.dependencies))packageJson.dependencies[name]=lock.packages['node_modules/'+name].version;await fs.writeFile('package.json',JSON.stringify(packageJson,null,2)+'\n');

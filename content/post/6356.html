@@ -1,0 +1,193 @@
+
+<p class="wp-block-paragraph">In February 2011, I watched two things fall apart at once: a project I cared deeply about and a teammate I was trying hard to protect. In the weeks that followed, I wrote one of my shortest blog posts ever 
+— just three paragraphs — but the question at its heart has stayed with me through every career review, every retrospective, and every performance conversation since.</p>
+
+
+
+<p class="wp-block-paragraph">A close team member was going through deep personal turmoil. I tried to stand by him. I gave him more time and support, believing that if he could just get through this phase, he would shine again. Instead, he made a serious blunder at a client site and when confronted, he was completely unapologetic. He was eventually fired, and almost immediately the fingers turned toward me for not taking a harder decision earlier.</p>
+
+
+
+<p class="wp-block-paragraph">In my mind, I was doing what had worked in the past: bet on people, give them space, and watch them turn things around. This time, that didn’t happen and the organization didn’t see my intent, only the outcome. It was a painful but formative lesson in how harshly we judge decisions when we don’t like where they land.</p>
+
+
+
+<p class="wp-block-paragraph">A few weeks later, I captured that discomfort in a short blog post. It asked a deceptively simple question that I wasn’t yet able to answer: how do you take responsibility for your decisions… without becoming a prisoner of their outcomes?</p>
+
+
+
+<blockquote class="wp-block-quote is-layout-flow wp-block-quote-is-layout-flow">
+<p class="wp-block-paragraph">When you lose, whatever decision you take is considered wrong by the majority. When you win, everybody believes it was the right decision. So decisions are considered right or wrong based on the end result.</p>
+<cite>— February 2011</cite></blockquote>
+
+
+
+<p class="wp-block-paragraph">I did not know the term for it then. Behavioural economists call it <strong>outcome bias</strong>: the tendency to evaluate the quality of a decision based on its outcome, rather than on the quality of the reasoning that went into it.</p>
+
+
+
+<hr class="wp-block-separator has-css-opacity" />
+
+
+
+<h2 class="wp-block-heading">Why This Matters in Engineering Leadership</h2>
+
+
+
+<p class="wp-block-paragraph">In every sprint retrospective and PI planning review I have facilitated since, I have seen the same pattern repeat. If the release went well, the decisions made along the way are remembered as wise. If it did not, those same decisions become cautionary tales. The story we tell about the decision changes entirely depending on whether we are currently winning or losing.</p>
+
+
+
+<p class="wp-block-paragraph">Back in February 2011, one of our product teams was staring at an uncomfortable reality. There were thousands of test scenarios to run, a hard release deadline, and no way to do everything thoroughly without slipping the date by at least a month. You’ve probably been in a similar room: too much to test, too little time, and stakeholders who still insist that quality is “non‑negotiable.”
+
+We had two options:
+– Push the release out by a month, or
+– Design a test strategy that focused deeply on the most critical scenarios, and tested the rest through smart sampling and random coverage.
+
+We chose the second path. Using a Pareto mindset, we identified the small set of scenarios most likely to cause serious user or business impact if they failed. Those were tested rigorously. The remaining scenarios were covered with a mix of risk-based sampling and random tests. This approach bought us time to focus on what truly mattered while still maintaining reasonable breadth of coverage.
+
+The release went out on time.
+
+In the first month after GA, about 4–5 minor issues were reported by clients. None were catastrophic. All were quickly fixed. Yet that’s when the real storm began. The question surfaced in reviews and hallway conversations:
+
+– “Why didn’t we test everything?”
+– “Did we compromise on quality?”
+– “If these slipped through, what else did we miss?”
+
+In that first month, the perception quietly took hold that the team had not delivered a solid release. The few visible defects became the entire story.
+
+Here’s the interesting part: after those first 5 minor issues, we did not receive a single new client defect for the next year.
+
+The engineering decision was sound. The long‑term outcome was strong. But the early narrative was shaped by one thing:
+
+<strong>Outcome bias.</strong>
+
+—
+
+<strong>What is outcome bias?</strong>
+
+Outcome bias is our tendency to judge a decision purely by its outcome, rather than by the quality of the decision at the time it was made.
+
+If the release goes smoothly, the decision must have been good.
+If a few bugs show up early, the decision must have been bad.
+
+But that’s not how real life works, especially in engineering. We make decisions under uncertainty, with incomplete information, constrained time, and finite resources. A good decision can still lead to a bad outcome. A sloppy decision can, by luck, lead to a good one.
+
+In the February 2011 release, the team:
+– Explicitly acknowledged constraints (time, cost, capacity)
+– Prioritized based on business risk and user impact
+– Selected a strategy (deep focus on critical flows + sampled random coverage)
+– Communicated trade‑offs
+
+By any reasonable decision‑quality metric, that’s a thoughtful, responsible approach. Yet the early feedback centered only on the visible defects, not the rigor of the process.
+
+That’s outcome bias in action.
+
+—
+
+<strong>Why outcome bias matters so much in engineering leadership</strong>
+
+As an engineering leader, you live in a world of bets:
+– Which tech debt can we safely defer?
+– Where do we invest in automation vs. manual checks?
+– How much experimentation can we afford this quarter?
+– Which incidents deserve deep root cause analysis and which get a lighter touch?
+
+Every one of these is a decision under uncertainty. If you and your teams are judged only on visible outcomes, a few things start to happen:
+
+1. <strong>You optimize for optics, not truth.</strong>
+   Teams start avoiding bold but necessary bets because they fear visible failure more than they value thoughtful risk‑taking.
+
+2. <strong>People become risk‑averse and defensive.</strong>
+   When a few bugs can erase recognition for months of good decisions, engineers naturally protect themselves. Innovation slows. Learning stops.
+
+3. <strong>Postmortems become blame sessions.</strong>
+   Instead of asking, “Did we make the best decision with what we knew then?”, the question becomes, “Who approved this?” The focus shifts from improving systems to finding culprits.
+
+4. <strong>You lose signal about actual decision quality.</strong>
+   If good decisions that had bad luck are punished, and lucky shortcuts are celebrated, the organization’s internal compass gets distorted.
+
+If you want a mature, resilient engineering culture, you cannot afford to let outcome bias run the show. You need people who can make clear, courageous decisions under constraints — and feel psychologically safe doing so.
+
+That’s where an unexpected but timeless source offers a powerful lens: the Bhagavad Gita.</p>
+
+
+
+<p class="wp-block-paragraph">I’ve seen this play out over and over. The architecture choice that caused no issues in production? “Good call.” The same architecture choice that revealed a scaling problem three months later? “We should have known better.” The slide in perception is swift, and often unfair.</p>
+
+
+
+<p class="wp-block-paragraph">Yet here is the uncomfortable truth: the decision quality in both cases is often identical. What changed is the context, the load, the unexpected dependency. The outcome changed. The reasoning did not.</p>
+
+
+
+<p class="wp-block-paragraph">When teams learn that outcome determines judgment, they stop taking thoughtful risks. They start making decisions that are <em>defensible</em> rather than decisions that are <em>right</em>. The bolder, better‑reasoned option gets abandoned for the one that is easier to explain if things go wrong.</p>
+
+
+
+<h2 class="wp-block-heading">The Gita’s Answer, and Why It Still Feels Radical</h2>
+
+
+
+<p class="wp-block-paragraph">The Bhagavad Gita addressed this 5,000 years ago: <em>you have a right to action, not to its fruits.</em> When I first encountered this line, it sounded abstract and philosophical. Over time, it has become one of the most practical leadership ideas I know.</p>
+
+
+
+<p class="wp-block-paragraph">In our world, attachment to outcome shows up as fear: fear of missing a quarter, fear of a visible incident, fear of losing credibility with the board or the team. Under that pressure, it becomes tempting to choose the option that protects our image rather than the one that best serves the system.</p>
+
+
+
+<p class="wp-block-paragraph">The Gita’s challenge is not to stop caring about results. It is to separate the quality of our reasoning from the randomness of outcome. A good decision, made with the best available information and clear thinking, can still produce a bad outcome. A poor decision, made impulsively or defensively, can still get lucky.</p>
+
+
+
+<p class="wp-block-paragraph">As engineering leaders, our job is to build a culture that can tell the difference — and to model, in our own behaviour, that we judge ourselves and others primarily by the integrity of the decision, not just the latest set of metrics.</p>
+
+
+
+<h3 class="wp-block-heading">How to Actually Do This</h3>
+
+
+
+<p class="wp-block-paragraph">So what does this look like on Monday morning, when you are staring at a risky release, a tough trade‑off, or an uncomfortable incident review? Here are a few practices that have helped me and the teams I work with.</p>
+
+
+
+<p class="wp-block-paragraph">1. <strong>Capture decisions when they are made, not after they succeed or fail.</strong><br />For any non‑trivial release, architecture change, or production risk, write down a short decision note:
+– What problem are we solving?
+– What constraints are we under (time, people, cost, dependencies)?
+– Which options did we consider, and why did we choose this one?
+– What risks are we consciously accepting?
+This doesn’t need to be a big template; a half‑page in a shared doc is enough. The point is to leave an honest trail of how you were thinking at the time.</p>
+
+
+
+<hr class="wp-block-separator has-css-opacity" />
+
+
+
+<p class="wp-block-paragraph">5. <strong>Hold yourself to the same standard.</strong><br />When you look back on your own calls — a promotion, an investment, a rewrite, a risky launch — ask first: “Given what I knew then, did I choose and execute with clarity, integrity, and diligence?” Only then ask, “Would I do the same again, knowing what I know now?” This simple discipline keeps you from rewriting your own history based only on the scoreboard.</p>
+
+
+
+<p class="wp-block-paragraph">4. <strong>Praise courageous, well‑reasoned decisions — even when they hurt in the short term.</strong><br />When someone on your team makes a thoughtful call that later leads to a painful incident, resist the urge to quietly distance yourself. Instead, name what was done well in the decision process, then ask what you all can learn from the outcome. Conversely, when a rushed or weakly reasoned decision happens to “work out,” resist the easy celebration. Use it as a moment to talk about the difference between good results and good reasoning.</p>
+
+
+
+<p class="wp-block-paragraph">The question I ended with in 2011 was: <em>Can we take decisions detaching them from their results?</em> At the time, it felt like an almost impossible ask — especially in environments where careers, bonuses, and reputations ride on those results.</p>
+
+
+
+<p class="wp-block-paragraph">My answer now is quieter and more practical: probably not fully — we are human, and results will always touch our emotions. But we can build systems and cultures that reward good reasoning regardless of outcome. We can choose, as leaders, to notice and name when someone makes a clear, principled decision under pressure, even if the dice fall against them.</p>
+
+
+
+<p class="wp-block-paragraph">That has changed how I see that February 2011 version of myself: a leader trying to do the right thing with the tools and understanding he had. I suspect you can look back and see your own versions of that person too — the you who made a courageous call that didn’t quite land, or stood by someone and paid a price for it.</p>
+
+
+
+<p class="wp-block-paragraph">If you’re willing, take one recent decision that still lives in your head — a release, a hiring call, a production risk — and ask yourself two questions:<br />– Given what I knew then, was this a good decision?<br />– What would I change now: the decision, the process, or just my relationship to the outcome?<br /><br />That quiet examination, done honestly, is where leadership really grows.</p>
+
+
+
+<p class="wp-block-paragraph"><em>Originally written in February 2011 as a three‑paragraph question — republished in 2026 with the answer I am still learning to live.</em></p>

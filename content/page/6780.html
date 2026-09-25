@@ -1,0 +1,206 @@
+
+<p class="has-medium-font-size wp-block-paragraph">AI is easier to understand as a stack of layers than as a list of buzzwords. Each layer builds on the ones beneath it: models are trained on data, language models turn that training into fluent text, retrieval and tools connect them to real knowledge, and evaluation and governance keep the whole thing trustworthy.</p>
+
+
+
+<p class="wp-block-paragraph">This page is the map. Every concept gets a plain-language definition, and wherever I have written an in-depth guide, the concept links straight to it. New guides will be added here as they are published.</p>
+
+
+
+<div class="wp-block-group alignwide is-layout-flow wp-block-group-is-layout-flow">
+<figure>The AI stack: seven layers from Foundations at the bottom to Quality and safety at the top07060504030201Quality &amp; safetyAgents &amp; toolsCustomising modelsKnowledge &amp; retrievalWorking with modelsLanguage modelsFoundationsevals · guardrails · governancetool use · agents · MCPfine-tuning · LoRA · RLHFembeddings · RAG · GraphRAGprompting · reasoning · contexttokens · transformers · context windowAI · machine learning · deep learning↑ BUILD FROM THE BOTTOM UP · EACH LAYER RELIES ON THE ONES BENEATH IT</figure>
+</div>
+
+
+
+<div class="wp-block-columns alignwide is-layout-flex wp-container-core-columns-is-layout-0a24b9e7 wp-block-columns-is-layout-flex">
+<div class="wp-block-column is-layout-flow wp-block-column-is-layout-flow">
+<div class="wp-block-group has-tertiary-background-color has-background has-global-padding is-layout-constrained wp-container-core-group-is-layout-0e4ecca0 wp-block-group-is-layout-constrained">
+<h3 class="wp-block-heading">New to AI?</h3>
+
+
+
+<p class="wp-block-paragraph">Start at the bottom of the stack with <a href="/#foundations">Foundations</a> and <a href="/#language-models">Language models</a>. Everything above depends on them.</p>
+</div>
+</div>
+
+
+
+<div class="wp-block-column is-layout-flow wp-block-column-is-layout-flow">
+<div class="wp-block-group has-tertiary-background-color has-background has-global-padding is-layout-constrained wp-container-core-group-is-layout-0e4ecca0 wp-block-group-is-layout-constrained">
+<h3 class="wp-block-heading">Building something?</h3>
+
+
+
+<p class="wp-block-paragraph">Jump to <a href="/#knowledge">Knowledge &amp; retrieval</a> and <a href="/#agents">Agents &amp; tools</a>, where most enterprise AI work happens today.</p>
+</div>
+</div>
+
+
+
+<div class="wp-block-column is-layout-flow wp-block-column-is-layout-flow">
+<div class="wp-block-group has-tertiary-background-color has-background has-global-padding is-layout-constrained wp-container-core-group-is-layout-0e4ecca0 wp-block-group-is-layout-constrained">
+<h3 class="wp-block-heading">Taking it to production?</h3>
+
+
+
+<p class="wp-block-paragraph">Read <a href="/#quality">Quality &amp; safety</a>: evaluation, guardrails and governance decide whether a demo becomes a dependable system.</p>
+</div>
+</div>
+</div>
+
+
+
+<hr class="wp-block-separator alignwide has-alpha-channel-opacity" />
+
+
+
+<h2 class="wp-block-heading" id="deep-dives">Deep dives</h2>
+
+
+
+<p class="wp-block-paragraph">In-depth guides on individual concepts, written from basic to advanced.</p>
+
+
+
+<div class="wp-block-group alignwide has-tertiary-background-color has-background has-global-padding is-layout-constrained wp-container-core-group-is-layout-beef5b8c wp-block-group-is-layout-constrained">
+<p class="has-secondary-color has-text-color has-small-font-size wp-block-paragraph">Knowledge &amp; retrieval · Basic to advanced</p>
+
+
+
+<h3 class="wp-block-heading has-large-font-size">RAG: Retrieval-Augmented Generation</h3>
+
+
+
+<p class="wp-block-paragraph">How to connect a language model to your own knowledge so it answers from evidence, cites its sources and says so when the evidence isn’t there. The guide starts from first principles and goes through chunking, embeddings, hybrid search, reranking and metadata filters, then on to agentic RAG, GraphRAG, evaluation, security and running it in production.</p>
+
+
+
+<figure>How RAG works: an indexing pipeline prepares documents into a shared index, and a question pipeline retrieves from it to generate a cited answerINDEXING · OFFLINE, AHEAD OF TIMEQUESTION · EVERY REQUESTsearch the indexDocumentsParse &amp; chunkEmbedShared indexQuestionRetrieveAugmentGeneratepolicies, contracts,notes, ticketssplit, then attach source,version and accesstext becomes vectorsof meaningvector + keywordsearch“What is our appealdeadline?”filter, search,rerank top chunksrules + evidence+ questioncited answer, or“not enough evidence”The rule: the model is only as good as the evidence it is given.</figure>
+
+
+
+<div class="wp-block-buttons is-layout-flex wp-block-buttons-is-layout-flex">
+<div class="wp-block-button"><a class="wp-block-button__link wp-element-button" href="/rag-explained.html">Read the RAG guide</a></div>
+
+
+
+<div class="wp-block-button is-style-outline is-style-outline--4"><a class="wp-block-button__link wp-element-button" href="https://claude.ai/artifact/VPMVrdJYNLdNNA985WFy7N" rel="noreferrer noopener">Try the interactive 60-minute workshop</a></div>
+</div>
+</div>
+
+
+
+<hr class="wp-block-separator alignwide has-alpha-channel-opacity" />
+
+
+
+<h2 class="wp-block-heading" id="concept-map">The concept map</h2>
+
+
+
+<p class="wp-block-paragraph">The seven layers of the stack, bottom to top. Where a concept is covered in depth, the last column links to the guide.</p>
+
+
+
+<h3 class="wp-block-heading" id="foundations">01 · Foundations</h3>
+
+
+
+<p class="wp-block-paragraph">What AI is, and how machines learn from data rather than from hand-written rules.</p>
+
+
+
+<figure class="wp-block-table alignwide is-style-stripes"><table><thead><tr><th>Concept</th><th>In plain words</th></tr></thead><tbody><tr><td><strong>Artificial intelligence</strong></td><td>Systems that perform tasks that normally need human judgement: recognising, predicting, generating and deciding.</td></tr><tr><td><strong>Machine learning</strong></td><td>Learning patterns from examples instead of following rules a programmer wrote by hand.</td></tr><tr><td><strong>Deep learning</strong></td><td>Machine learning with many-layered neural networks. It powers modern vision, speech and language models.</td></tr><tr><td><strong>Neural network</strong></td><td>Layers of simple connected units. Training adjusts the strength (weight) of each connection until the outputs are useful.</td></tr><tr><td><strong>Supervised, unsupervised, reinforcement learning</strong></td><td>Learning from labelled examples, from structure in unlabelled data, and from rewards for good actions.</td></tr><tr><td><strong>Training vs inference</strong></td><td>Training sets the model’s weights from data: expensive and occasional. Inference uses the finished model to answer: cheap and constant.</td></tr></tbody></table></figure>
+
+
+
+<h3 class="wp-block-heading" id="language-models">02 · Language models</h3>
+
+
+
+<p class="wp-block-paragraph">The engine behind chat assistants: what a large language model is, and the limits that shape how you use it.</p>
+
+
+
+<figure class="wp-block-table alignwide is-style-stripes"><table><thead><tr><th>Concept</th><th>In plain words</th></tr></thead><tbody><tr><td><strong>Large language model (LLM)</strong></td><td>A model trained on vast amounts of text to predict the next piece of text. Scale gives it broad language, knowledge and reasoning ability.</td></tr><tr><td><strong>Token</strong></td><td>The unit a model reads and writes, roughly a word or part of a word. Limits and pricing are counted in tokens.</td></tr><tr><td><strong>Transformer and attention</strong></td><td>The architecture behind modern LLMs (introduced in 2017). Attention lets every token weigh the relevance of every other token in the input.</td></tr><tr><td><strong>Context window</strong></td><td>The maximum amount of text the model can consider at once: instructions, documents, conversation and its own answer.</td></tr><tr><td><strong>Temperature</strong></td><td>How much randomness goes into word choice. Low for consistent, factual work; higher for variety and brainstorming.</td></tr><tr><td><strong>Knowledge cutoff</strong></td><td>The date after which the model’s training data stops. Anything later is unknown to it unless supplied.</td></tr><tr><td><strong>Hallucination</strong></td><td>Fluent, confident output that isn’t supported by facts or sources.</td></tr><tr><td><strong>Multimodal model</strong></td><td>A model that works with more than text: images, audio, documents or video, as input, output or both.</td></tr></tbody></table></figure>
+
+
+
+<h3 class="wp-block-heading" id="working-with-models">03 · Working with models</h3>
+
+
+
+<p class="wp-block-paragraph">How to get reliable results from a model without changing the model itself.</p>
+
+
+
+<figure class="wp-block-table alignwide is-style-stripes"><table><thead><tr><th>Concept</th><th>In plain words</th></tr></thead><tbody><tr><td><strong>Prompt engineering</strong></td><td>Writing clear instructions with the right context, examples and output format. The fastest, cheapest lever you have.</td></tr><tr><td><strong>System prompt</strong></td><td>Standing instructions that set the model’s role, rules and tone for a whole conversation or application.</td></tr><tr><td><strong>Zero-shot and few-shot</strong></td><td>Asking with no examples, versus including a few worked examples of the task in the prompt.</td></tr><tr><td><strong>Chain of thought and reasoning models</strong></td><td>Working step by step before answering. Reasoning models do this internally, trading speed for accuracy on hard problems.</td></tr><tr><td><strong>Structured output</strong></td><td>Asking for JSON or another fixed format so that software, not just people, can use the answer.</td></tr><tr><td><strong>Context engineering</strong></td><td>Deciding what goes into the context window, in what order: instructions, documents, history and tools.</td></tr></tbody></table></figure>
+
+
+
+<h3 class="wp-block-heading" id="knowledge">04 · Knowledge &amp; retrieval</h3>
+
+
+
+<p class="wp-block-paragraph">Connecting models to knowledge they were never trained on: your documents, policies and data, kept current and permissioned.</p>
+
+
+
+<figure class="wp-block-table alignwide is-style-stripes"><table><thead><tr><th>Concept</th><th>In plain words</th><th>Go deeper</th></tr></thead><tbody><tr><td><strong>Embeddings</strong></td><td>Numbers that capture the meaning of text, so similar ideas sit close together even when the words differ.</td><td><a href="/rag-explained.html#pipeline">RAG guide §2</a></td></tr><tr><td><strong>Vector database</strong></td><td>A store built to find the embeddings nearest to a query, quickly and at scale.</td><td><a href="/rag-explained.html#pipeline">RAG guide §2</a></td></tr><tr><td><strong>Retrieval-Augmented Generation (RAG)</strong></td><td>Find relevant evidence first, then ask the model to answer from it, with citations.</td><td><a href="/rag-explained.html">Full guide</a></td></tr><tr><td><strong>Hybrid search and reranking</strong></td><td>Combining meaning-based and keyword search, then re-ordering the shortlist for relevance.</td><td><a href="/rag-explained.html#advanced">RAG guide §4</a></td></tr><tr><td><strong>Knowledge graphs and GraphRAG</strong></td><td>Storing entities and their relationships, so questions that span documents can be answered by following the links.</td><td><a href="/rag-explained.html#agentic">RAG guide §5</a></td></tr><tr><td><strong>Long context vs retrieval</strong></td><td>Pasting everything in works for a few known documents; retrieval is needed for large, changing or permissioned collections.</td><td><a href="/rag-explained.html#basics">RAG guide §1</a></td></tr></tbody></table></figure>
+
+
+
+<h3 class="wp-block-heading" id="customising">05 · Customising models</h3>
+
+
+
+<p class="wp-block-paragraph">Changing how a model behaves, rather than what it can see. A useful rule: customise for <em>how</em> it should answer, retrieve for <em>what</em> it should know.</p>
+
+
+
+<figure class="wp-block-table alignwide is-style-stripes"><table><thead><tr><th>Concept</th><th>In plain words</th></tr></thead><tbody><tr><td><strong>Fine-tuning</strong></td><td>Further training on your own examples to change style, format or skill at a specific task.</td></tr><tr><td><strong>LoRA and parameter-efficient tuning</strong></td><td>Training a small set of add-on weights instead of the whole model: far cheaper, and easy to swap in and out.</td></tr><tr><td><strong>RLHF and preference tuning</strong></td><td>Training on human (or AI) judgements of which answer is better, to make a model more helpful and safer.</td></tr><tr><td><strong>Distillation</strong></td><td>Training a smaller, faster model to imitate a larger one on the tasks you care about.</td></tr><tr><td><strong>Quantisation</strong></td><td>Storing a model’s numbers at lower precision so it runs faster and cheaper, with a small loss in quality.</td></tr><tr><td><strong>Open-weight vs hosted models</strong></td><td>Downloading and running a model yourself, versus calling a provider’s model through an API.</td></tr></tbody></table></figure>
+
+
+
+<h3 class="wp-block-heading" id="agents">06 · Agents &amp; tools</h3>
+
+
+
+<p class="wp-block-paragraph">Models that act, not just answer: calling tools, working through multi-step tasks and checking their own progress.</p>
+
+
+
+<div class="wp-block-group alignwide is-layout-flow wp-block-group-is-layout-flow">
+<figure>The agent loop: plan, act, observe, reflect, around a goal and a model, repeating until the goal is metGoal + modelreasons at each stepPlanActObserveReflectbreak into stepscall a tool or searchread the resultdone, or try again?Tools: search · databases · APIs · code · MCP servers</figure>
+</div>
+
+
+
+<figure class="wp-block-table alignwide is-style-stripes"><table><thead><tr><th>Concept</th><th>In plain words</th><th>Go deeper</th></tr></thead><tbody><tr><td><strong>Tool use (function calling)</strong></td><td>The model asks, in a structured way, for a function or API to be run. The application runs it and hands back the result.</td><td></td></tr><tr><td><strong>AI agent</strong></td><td>A model working in a loop of plan, act, observe and reflect until a goal is met or a human is needed.</td><td></td></tr><tr><td><strong>Model Context Protocol (MCP)</strong></td><td>An open standard, introduced by Anthropic in 2024, for connecting AI applications to tools and data sources through one common interface.</td><td></td></tr><tr><td><strong>Agentic RAG</strong></td><td>An agent that plans its searches, routes them to the right sources and re-queries when evidence is missing.</td><td><a href="/rag-explained.html#agentic">RAG guide §5</a></td></tr><tr><td><strong>Multi-agent systems</strong></td><td>Several specialised agents, such as a planner, a researcher and a reviewer, coordinating on one task.</td><td></td></tr><tr><td><strong>Human in the loop</strong></td><td>Approval checkpoints before an agent takes consequential or irreversible actions.</td><td></td></tr></tbody></table></figure>
+
+
+
+<h3 class="wp-block-heading" id="quality">07 · Quality &amp; safety</h3>
+
+
+
+<p class="wp-block-paragraph">What turns an impressive demo into a system people can depend on.</p>
+
+
+
+<figure class="wp-block-table alignwide is-style-stripes"><table><thead><tr><th>Concept</th><th>In plain words</th><th>Go deeper</th></tr></thead><tbody><tr><td><strong>Evaluations (evals)</strong></td><td>Repeatable tests of a system against a set of questions with known good answers, run whenever anything changes.</td><td><a href="/rag-explained.html#evaluation">RAG guide §6</a></td></tr><tr><td><strong>LLM-as-judge</strong></td><td>Using a model to grade outputs at scale. Useful, but calibrate it against human reviewers.</td><td><a href="/rag-explained.html#evaluation">RAG guide §6</a></td></tr><tr><td><strong>Grounding and citations</strong></td><td>Tying every claim to a source the reader can check, and allowing “I don’t have enough evidence”.</td><td><a href="/rag-explained.html#pipeline">RAG guide §2</a></td></tr><tr><td><strong>Guardrails</strong></td><td>Checks on what goes into and comes out of a model: content filters, policy rules, format validation.</td><td></td></tr><tr><td><strong>Prompt injection</strong></td><td>Malicious instructions hidden in content the model reads, such as a web page or document, that try to hijack its behaviour.</td><td><a href="/rag-explained.html#security">RAG guide §7</a></td></tr><tr><td><strong>Observability</strong></td><td>Tracing each request, with its inputs, sources, cost, latency and feedback, so failures can be reproduced and fixed.</td><td><a href="/rag-explained.html#production">RAG guide §8</a></td></tr><tr><td><strong>Responsible AI and governance</strong></td><td>Fairness, privacy, transparency and accountability, guided by frameworks such as the NIST AI Risk Management Framework and the EU AI Act.</td><td></td></tr></tbody></table></figure>
+
+
+
+<hr class="wp-block-separator alignwide has-alpha-channel-opacity" />
+
+
+
+<div class="wp-block-group has-tertiary-background-color has-background has-global-padding is-layout-constrained wp-container-core-group-is-layout-0e4ecca0 wp-block-group-is-layout-constrained">
+<h3 class="wp-block-heading">One principle across every layer</h3>
+
+
+
+<p class="wp-block-paragraph">Most AI failures are not model failures. They start in the data, the retrieval, the instructions or the missing checks around the model. Understanding the layers is what lets you find the real cause, instead of reaching for a bigger model.</p>
+</div>

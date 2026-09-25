@@ -1,0 +1,126 @@
+
+<p class="wp-block-paragraph"></p>
+
+
+
+<figure class="wp-block-image size-full"><a href="/wp-content/uploads/2026/02/my-first-python-coding-agent.png"><img loading="lazy" width="1024" height="768" src="/wp-content/uploads/2026/02/my-first-python-coding-agent.png" alt="" class="wp-image-6138" /></a></figure>
+
+
+
+<p class="wp-block-paragraph">I built a Python Coding Agent from scratch this weekend. </p>
+
+
+
+<p class="wp-block-paragraph">Here’s the full playbook.</p>
+
+
+
+<p class="wp-block-paragraph">You type: “Create a function that analyzes a list of numbers.”<br />It returns: Working, production-ready Python code. In 3 seconds.</p>
+
+
+
+<p class="wp-block-paragraph">Here’s how I did it — and how you can replicate it in 30 minutes:</p>
+
+
+
+<hr class="wp-block-separator has-alpha-channel-opacity" />
+
+
+
+<p class="wp-block-paragraph">⚡ THE STACK (Surprisingly Simple)</p>
+
+
+
+<ul class="wp-block-list">
+<li>Python 3.9+</li>
+
+
+
+<li>anthropic library (the Claude API SDK)</li>
+
+
+
+<li>python-dotenv (for API key safety)</li>
+
+
+
+<li>That’s literally it.</li>
+</ul>
+
+
+
+<hr class="wp-block-separator has-alpha-channel-opacity" />
+
+
+
+<p class="wp-block-paragraph">🔑 5 STEPS TO BUILD IT:</p>
+
+
+
+<p class="wp-block-paragraph">1️⃣ Get your Anthropic API key from console.anthropic.com<br />→ Use Claude Haiku for cost efficiency (~$0.001 per generation)</p>
+
+
+
+<p class="wp-block-paragraph">2️⃣ Install dependencies<br />→ pip install anthropic python-dotenv</p>
+
+
+
+<p class="wp-block-paragraph">3️⃣ Write a system prompt (the agent’s “brain”)<br />→ “You are an expert Python developer. Write clean, well-commented code with error handling.”</p>
+
+
+
+<p class="wp-block-paragraph">4️⃣ Build the core generate_code() function<br />→ Sends your requirement to Claude → Extracts the code block → Saves to output folder</p>
+
+
+
+<p class="wp-block-paragraph">5️⃣ Add exponential backoff retry logic<br />→ Handles API overloads gracefully (Error 529 is real — I hit it on Day 1!)</p>
+
+
+
+<hr class="wp-block-separator has-alpha-channel-opacity" />
+
+
+
+<p class="wp-block-paragraph">💰 COST REALITY CHECK</p>
+
+
+
+<ul class="wp-block-list">
+<li>100 code generations/day = ~₹10/day</li>
+
+
+
+<li>Claude Haiku: $0.25/million input tokens</li>
+
+
+
+<li>One code generation: ~$0.001</li>
+</ul>
+
+
+
+<p class="wp-block-paragraph">This is the most cost-effective AI tool I’ve built.</p>
+
+
+
+<hr class="wp-block-separator has-alpha-channel-opacity" />
+
+
+
+<p class="wp-block-paragraph">🎁 BONUS FEATURES I added:<br />✅ Conversation memory — refine code iteratively<br />✅ Model switching — Haiku for speed, Sonnet for complexity<br />✅ Cost tracker — shows token usage after every call<br />✅ Auto-save — generated code saved to /output folder</p>
+
+
+
+<hr class="wp-block-separator has-alpha-channel-opacity" />
+
+
+
+<p class="wp-block-paragraph">Full open source code 👇<br />🔗 github.com/sakti1977/PythonAgent</p>
+
+
+
+<p class="wp-block-paragraph">Star the repo if this was useful. I have made it a public repo. Feel free to find issues, suggest enhancements or optimize.</p>
+
+
+
+<p class="wp-block-paragraph"></p>

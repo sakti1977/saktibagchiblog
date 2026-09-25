@@ -1,0 +1,7 @@
+---
+import Layout from '../layouts/Layout.astro';
+import data from '../data/site.json';
+const posts=data.posts.slice(0,12);
+---
+<Layout title={data.home?.seoTitle} description={data.settings.description}><section class="hero"><p class="eyebrow">TECHNOLOGY · LEADERSHIP · LIFE</p><h1>{data.settings.headline}<br/><em>{data.settings.headlineAccent}</em></h1><p class="intro">{data.settings.intro}</p><a class="button" href="/archive/">Explore my writing <span aria-hidden="true">↗</span></a></section><details class="original-home"><summary>More about my work and this site</summary><div class="prose" set:html={data.home?.html}/></details><section class="writing"><div class="section-heading"><h2>The latest reflections</h2><a href="/archive/">All {data.posts.length} articles →</a></div><div class="grid">{posts.map((post,index)=><article class:list={['card',{'featured':index===0}]}>{post.image&&<a tabindex="-1" aria-hidden="true" href={post.path}><img src={post.image} alt="" loading={index===0?'eager':'lazy'} /></a>}<div class="card-body"><p class="eyebrow">{post.categoryNames.join(' / ')}</p><h3><a href={post.path}>{post.title}</a></h3><p>{post.description}</p><time datetime={post.date}>{post.dateLabel}</time></div></article>)}</div></section></Layout>
+

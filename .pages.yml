@@ -1,0 +1,125 @@
+media:
+  input: public/images
+  output: /images
+content:
+  - name: posts
+    label: Blog posts
+    type: collection
+    path: content/posts
+    format: json
+    filename: '{year}-{month}-{day}-{primary}.json'
+    view:
+      primary: title
+      fields: [title, date, draft]
+      sort: date
+      order: desc
+    fields: &articleFields
+      - name: title
+        label: Title
+        type: string
+        required: true
+      - name: draft
+        label: Keep as draft (not shown on the website)
+        type: boolean
+        default: true
+      - name: date
+        label: Publication date
+        type: date
+        required: true
+        options:
+          time: true
+      - name: path
+        label: Permanent web address
+        type: string
+        required: true
+        description: 'Example: /2026/09/24/my-new-article/ — keep existing addresses unchanged.'
+      - name: description
+        label: Short summary for readers and search engines
+        type: text
+      - name: image
+        label: Cover image
+        type: image
+      - name: categoryNames
+        label: Topics
+        type: string
+        list: true
+      - name: tagNames
+        label: Tags
+        type: string
+        list: true
+      - name: html
+        label: Article
+        type: rich-text
+        options:
+          format: html
+          switcher: true
+      - name: seoTitle
+        label: Search engine title (optional)
+        type: string
+      - name: kind
+        type: string
+        hidden: true
+        default: post
+      - name: id
+        type: number
+        hidden: true
+      - name: categories
+        type: number
+        list: true
+        hidden: true
+      - name: tags
+        type: number
+        list: true
+        hidden: true
+      - name: modified
+        type: string
+        hidden: true
+  - name: pages
+    label: Website pages
+    type: collection
+    path: content/pages
+    format: json
+    filename: '{primary}.json'
+    view:
+      primary: title
+      fields: [title, draft]
+    operations:
+      create: false
+      delete: false
+      rename: false
+    fields: *articleFields
+  - name: site
+    label: Homepage and navigation
+    type: file
+    path: content/settings/site.json
+    format: json
+    fields:
+      - name: title
+        label: Website name
+        type: string
+      - name: tagline
+        label: Tagline
+        type: string
+      - name: headline
+        label: Main heading
+        type: string
+      - name: headlineAccent
+        label: Second heading line
+        type: string
+      - name: intro
+        label: Introduction
+        type: text
+      - name: description
+        label: Search engine description
+        type: text
+      - name: menu
+        label: Navigation links
+        type: object
+        list: true
+        fields:
+          - name: label
+            label: Link text
+            type: string
+          - name: path
+            label: Web address
+            type: string

@@ -1,0 +1,22 @@
+{
+  "title": "Life as Sakti",
+  "tagline": "NOTES ON A LIFE OF LEARNING",
+  "headline": "Learning from life.",
+  "headlineAccent": "Thinking out loud.",
+  "intro": "I’m Sakti. I listen, observe, and explore the rhythms of human behavior, technology, and the world around us. These are my notes along the way.",
+  "description": "Essays by Sakti Prasad Bagchi on AI and technology, engineering leadership, and the inner life, from 25 years of building healthcare software and learning from life.",
+  "menu": [
+    {
+      "label": "Technology & AI",
+      "path": "/technology-and-ai.html"
+    },
+    {
+      "label": "About",
+      "path": "/where-technology-meets-human-insight-2.html"
+    },
+    {
+      "label": "Contact",
+      "path": "/contact.html"
+    }
+  ]
+}

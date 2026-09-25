@@ -1,0 +1,3 @@
+import fs from 'node:fs/promises';
+const file='content/posts/3210.json';const p=JSON.parse(await fs.readFile(file,'utf8'));p.html=p.html.replace(/<p><img[^>]*image_567742329817944\.jpg[^>]*><\/p>/,'<p class="muted">An image from the original publication is unavailable.</p>');await fs.writeFile(file,JSON.stringify(p,null,2));
+const audit=JSON.parse(await fs.readFile('reports/audit.json','utf8'));audit.contentIssues=[{id:3210,path:p.path,type:'broken-source-image',description:'The original HTML points to a private iPhone filesystem path. Replaced the broken image with an unavailable-image note; original snapshot retained.'}];await fs.writeFile('reports/audit.json',JSON.stringify(audit,null,2));

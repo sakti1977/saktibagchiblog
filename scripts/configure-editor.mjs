@@ -1,0 +1,8 @@
+import fs from 'node:fs/promises';
+const read=async f=>JSON.parse((await fs.readFile(f,'utf8')).replace(/^\uFEFF/,''));
+let p=await read('package.json');p.scripts.build='node scripts/prepare-content.mjs && astro build';p.scripts.dev='node scripts/prepare-content.mjs && astro dev --host 0.0.0.0';await fs.writeFile('package.json',JSON.stringify(p,null,2));
+const lock=await read('package-lock.json');lock.packages[''].dependencies=p.dependencies;await fs.writeFile('package-lock.json',JSON.stringify(lock,null,2));
+const settings=await read('content/settings/site.json');settings.menu=[{label:'Technology & AI',path:'/technology-and-ai.html'},{label:'About',path:'/where-technology-meets-human-insight-2.html'},{label:'Contact',path:'/contact.html'}];await fs.writeFile('content/settings/site.json',JSON.stringify(settings,null,2));
+let layout=await fs.readFile('src/layouts/Layout.astro','utf8');layout=layout.replace('Life as Sakti<span>NOTES ON A LIFE OF LEARNING</span>','{data.settings.title}<span>{data.settings.tagline}</span>');await fs.writeFile('src/layouts/Layout.astro',layout);
+let home=await fs.readFile('src/pages/index.astro','utf8');home=home.replace('Learning from life.<br/><em>Thinking out loud.</em>','{data.settings.headline}<br/><em>{data.settings.headlineAccent}</em>').replace('I’m Sakti. I listen, observe, and explore the rhythms of human behavior, technology, and the world around us. These are my notes along the way.','{data.settings.intro}');await fs.writeFile('src/pages/index.astro',home);
+let route=await fs.readFile('src/pages/[...path].astro','utf8');route=route.replace("item.path.replace(/^\\/|\\/$/g,'')","decodeURIComponent(item.path.replace(/^\\/|\\/$/g,''))");await fs.writeFile('src/pages/[...path].astro',route);

@@ -1,0 +1,44 @@
+[
+  {
+    "kind": "posts",
+    "declaredTotal": 452,
+    "exported": 452,
+    "unique": 452
+  },
+  {
+    "kind": "pages",
+    "declaredTotal": 9,
+    "exported": 9,
+    "unique": 9
+  },
+  {
+    "kind": "categories",
+    "declaredTotal": 17,
+    "exported": 17,
+    "unique": 17
+  },
+  {
+    "kind": "tags",
+    "declaredTotal": 1417,
+    "exported": 1417,
+    "unique": 1417
+  },
+  {
+    "kind": "media",
+    "declaredTotal": 491,
+    "exported": 462,
+    "unique": 462
+  },
+  {
+    "kind": "comments",
+    "declaredTotal": 652,
+    "exported": 650,
+    "unique": 650
+  },
+  {
+    "kind": "users",
+    "declaredTotal": 1,
+    "exported": 1,
+    "unique": 1
+  }
+]

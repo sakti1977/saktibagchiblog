@@ -1,0 +1,3 @@
+import fs from 'node:fs/promises';
+for(const file of ['scripts/prepare-content.mjs']){let s=await fs.readFile(file,'utf8');s=s.replace("if(!p.title||!p.path||!p.date)","if(!p.title&&p.id)p.title='Untitled entry — '+p.date.slice(0,10);\n if(!p.title||!p.path||!p.date)");await fs.writeFile(file,s);}
+const audit=JSON.parse(await fs.readFile('reports/audit.json','utf8'));const manifest=[...audit.assets.map(a=>({path:a.path,url:a.url,sha256:a.sha256})),...audit.failures.filter(a=>a.type==='media').map(a=>({path:a.path,url:a.url}))];await fs.writeFile('content/settings/media-manifest.json',JSON.stringify(manifest));

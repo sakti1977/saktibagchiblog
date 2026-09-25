@@ -1,0 +1,220 @@
+
+<p class="wp-block-paragraph"></p>
+
+
+
+<figure class="wp-block-image size-large"><a href="/wp-content/uploads/2026/08/image-1.png"><img loading="lazy" width="1024" height="678" src="/wp-content/uploads/2026/08/image-1.png" alt="" class="wp-image-6723" /></a></figure>
+
+
+
+<p class="wp-block-paragraph">If you grew up in Odisha or belong to the global Odia diaspora, <strong>“the panji”</strong> is far more than a calendar—it is the heartbeat of cultural life. It defines when the earth rests during <em>Raja</em>, when fresh harvest is offered at <em>Nuakhai</em>, when <em>Snana Purnima</em> closes public darshan before the grand <em>Rath Yatra</em>, and when <em>Manabasa</em> Thursdays fill <em>Margashira</em> homes with the aroma of rice-paste <em>jhoti</em> and Lakshmi lore.</p>
+
+
+
+<p class="wp-block-paragraph">Yet, open almost any mainstream “Hindu calendar” app today, and you are met with a generic national default: English-first labels, flat grid numbers, and zero understanding of Odishan traditions—whether it is the coastal <em>Sri Mandir</em> rhythm of Puri or the <em>Biraja Peetha</em> calendar of northern Odisha.</p>
+
+
+
+<p class="wp-block-paragraph"><strong><a rel="noopener" href="https://odia-panchang.onrender.com/">Odia Panjika (ଓଡ଼ିଆ ପଞ୍ଜିକା)</a></strong> was built to solve this exact problem. It is a free, bilingual web platform, developer API, and daily social updates bot that computes the sky with astronomical accuracy while keeping Odia language, local traditions, and festival narratives intact.</p>
+
+
+
+<h2 class="wp-block-heading">Why Generic Calendar Apps Fail for Odisha</h2>
+
+
+
+<p class="wp-block-paragraph">India does not run on a single civil-religious clock. What people casually call “the Hindu calendar” is a family of regional systems. Most generic apps fail in Odisha because they treat the calendar like a standard 24-hour Gregorian grid with regional translations slapped on top.</p>
+
+
+
+<p class="wp-block-paragraph">To understand why a dedicated Odia engine is necessary, we have to look at two foundational concepts: <strong>Tithi</strong> and <strong>Purnimanta</strong>.</p>
+
+
+
+<h3 class="wp-block-heading">1. Understanding <em>Tithi</em>: The Orbital Speedometer of the Moon</h3>
+
+
+
+<p class="wp-block-paragraph">In the Western calendar, a day is straightforward: Earth completes one rotation, 24 hours pass, and the date changes at midnight.</p>
+
+
+
+<p class="wp-block-paragraph">A <strong>Tithi</strong> is completely different. It is a <strong>lunar day</strong>, defined by the precise angular distance between the Sun and the Moon in the sky.</p>
+
+
+
+<ul class="wp-block-list">
+<li>A full lunar orbit forms a 360 degree circle around Earth.</li>
+
+
+
+<li>Every time the Moon moves <strong>12 degrees ahead</strong> of the Sun, one Tithi passes (360 degree/ 12) = 30  Tithis per lunar month).</li>
+
+
+
+<li>Because the Moon’s orbit is elliptical, its orbital speed changes dynamically. As a result, <strong>a single Tithi can last anywhere from 19 to 26 solar hours</strong>.</li>
+</ul>
+
+
+
+<h4 class="wp-block-heading">Why Sunrise Anchoring Matters</h4>
+
+
+
+<p class="wp-block-paragraph">Because Tithis do not start or end at midnight, a Tithi like <em>Ekadashi</em> might begin at 3:15 PM on Tuesday and end at 1:40 PM on Wednesday.</p>
+
+
+
+<p class="wp-block-paragraph">In traditional Indian astronomy, a calendar day’s identity is decided by <strong>whichever Tithi is active at the exact moment of local sunrise</strong> (<em>Udaya Tithi</em>).</p>
+
+
+
+<blockquote class="wp-block-quote is-layout-flow wp-block-quote-is-layout-flow">
+<p class="wp-block-paragraph"><strong>The Problem with Generic Apps:</strong> If a generic calendar calculates sunrise for New Delhi or Mumbai instead of Puri, or uses a simplified 24-hour average instead of real-time planetary equations, it will declare major observances on the wrong calendar day entirely.</p>
+</blockquote>
+
+
+
+<h3 class="wp-block-heading">2. Understanding <em>Purnimanta</em> vs. <em>Amanta</em>: How Months Are Named</h3>
+
+
+
+<p class="wp-block-paragraph">Every lunar month contains two fortnights (<em>Pakshas</em>):</p>
+
+
+
+<ul class="wp-block-list">
+<li><strong>Shukla Paksha (Bright Half):</strong> New Moon -&gt;  Full Moon.</li>
+
+
+
+<li><strong>Krishna Paksha (Dark Half):</strong> Full Moon -&gt; New Moon.</li>
+</ul>
+
+
+
+<p class="wp-block-paragraph">Across different regions of India, calendars diverge sharply on one simple rule: <strong>When does a month officially end and the next month begin?</strong></p>
+
+
+<div class="wp-block-code">
+	<div class="cm-editor">
+		<div class="cm-scroller">
+			
+<pre><code class="language-markdown"><div class="cm-line">┌───────────────────────────────────────────────────────────────────────────┐</div><div class="cm-line">│                        PURNIMANTA SYSTEM (Odisha)                         │</div><div class="cm-line">│  <span class="tok-link tok-meta">[</span><span class="tok-link">Dark Half (Krishna)</span><span class="tok-link tok-meta">]</span> ──► NEW MOON ──► <span class="tok-link tok-meta">[</span><span class="tok-link">Bright Half (Shukla)</span><span class="tok-link tok-meta">]</span> ──► FULL MOON │</div><div class="cm-line">│  ▲                                                                        │</div><div class="cm-line">│  └── Month begins immediately after Full Moon                             │</div><div class="cm-line">└───────────────────────────────────────────────────────────────────────────┘</div><div class="cm-line"></div><div class="cm-line">┌───────────────────────────────────────────────────────────────────────────┐</div><div class="cm-line">│                       AMANTA SYSTEM (Western/South)                       │</div><div class="cm-line">│  <span class="tok-link tok-meta">[</span><span class="tok-link">Bright Half (Shukla)</span><span class="tok-link tok-meta">]</span> ──► FULL MOON ──► <span class="tok-link tok-meta">[</span><span class="tok-link">Dark Half (Krishna)</span><span class="tok-link tok-meta">]</span> ──► NEW MOON │</div><div class="cm-line">│  ▲                                                                        │</div><div class="cm-line">│  └── Month begins immediately after New Moon                              │</div><div class="cm-line">└───────────────────────────────────────────────────────────────────────────┘</div><div class="cm-line"></div><div class="cm-line"></div></code></pre>
+		</div>
+	</div>
+</div>
+
+
+<ol class="wp-block-list">
+<li><strong>Amanta System (Month ends on <em>Amavasya</em> / New Moon):</strong> Used in Maharashtra, Gujarat, Andhra Pradesh, and Karnataka.</li>
+
+
+
+<li><strong>Purnimanta System (Month ends on <em>Purnima</em> / Full Moon):</strong> Used in Odisha, North India, and parts of Eastern India.</li>
+</ol>
+
+
+
+<h4 class="wp-block-heading">The Festival Mislabeling Pitfall</h4>
+
+
+
+<p class="wp-block-paragraph">Because a Purnimanta month starts 15 days earlier during the dark fortnight, <strong>two people in different states can look at the exact same moon phase, yet reside in two differently named months.</strong></p>
+
+
+
+<p class="wp-block-paragraph">For example:</p>
+
+
+
+<ul class="wp-block-list">
+<li><em>Rath Yatra</em> takes place on <em>Shukla Dwitiya</em> (the 2nd day after the New Moon).</li>
+
+
+
+<li>Under Odisha’s <strong>Purnimanta system</strong>, this day sits inside the month of <strong>Ashadha</strong>.</li>
+
+
+
+<li>If an app defaults strictly to an Amanta calculation engine, it risks shifting festival names or miscalculating <em>adhika masa</em> (intercalary month) alignments, showing major observances a month late.</li>
+</ul>
+
+
+
+<h2 class="wp-block-heading">What Odia Panjika Delivers</h2>
+
+
+
+<p class="wp-block-paragraph">Odia Panjika bridges astronomical physics with regional tradition. When you open <a rel="noopener" href="https://odia-panchang.onrender.com/">odia-panchang.onrender.com</a></p>
+
+
+
+<p class="wp-block-paragraph">or query the free API, you get a localized day packet:</p>
+
+
+
+<figure class="wp-block-table"><table class="has-fixed-layout"><thead><tr><td><strong>Layer</strong></td><td><strong>What It Provides</strong></td></tr></thead><tbody><tr><td><strong>Day Elements</strong></td><td>Tithi, paksha, chandra (lunar) masa, soura (solar) masa, nakshatra, yoga, karana, and vara</td></tr><tr><td><strong>Localization</strong></td><td>Exact sunrise and sunset timing tailored to Odisha cities (Puri, Bhubaneswar, Jajpur, Sambalpur, etc.)</td></tr><tr><td><strong>Tradition Filters</strong></td><td>Selectable overlays for <strong>Jagannath</strong> (Puri), <strong>Biraja</strong> (Jajpur), and statewide common observances</td></tr><tr><td><strong>Bilingual Narratives</strong></td><td>Curated cultural stories explaining “what this day remembers” in English and proper Odia script (<em>yuktākṣara</em>)</td></tr><tr><td><strong>Automated Updates</strong></td><td>Daily social media broadcasts bringing daily panji highlights straight to your feed</td></tr><tr><td><strong>Developer API</strong></td><td>Documented JSON endpoints for site builders, Discord/Telegram bots, and research</td></tr></tbody></table></figure>
+
+
+
+<h2 class="wp-block-heading">Built with Engineering Precision</h2>
+
+
+
+<p class="wp-block-paragraph">Odia Panjika pairs high-precision astronomical computing with strict cultural guardrails:</p>
+
+
+
+<ul class="wp-block-list">
+<li><strong>Astronomical Core:</strong> Powered by <strong>Swiss Ephemeris</strong> (<code>pyswisseph</code>) running in <strong>Lahiri sidereal mode</strong> to calculate exact planetary positions.</li>
+
+
+
+<li><strong>Deterministic Muhurtas:</strong> Timings like <em>Rahu Kalam</em>, <em>Abhijit Muhurta</em>, and <em>Gulika Kalam</em> are mathematically computed directly from local sunrise/sunset—never estimated or generated by AI.</li>
+
+
+
+<li><strong>Guardrailed AI Layer:</strong> Optional LLM features supply historical anecdotes, temple context, and household notes. AI is strictly sandboxed and <strong>forbidden from modifying core astronomical fields</strong> (<em>tithi</em>, <em>masa</em>, or <em>nakshatra</em>).</li>
+</ul>
+
+
+
+<h2 class="wp-block-heading">Try It &amp; Build With It</h2>
+
+
+
+<figure class="wp-block-image size-large"><a href="/wp-content/uploads/2026/08/image.png"><img loading="lazy" width="1024" height="681" src="/wp-content/uploads/2026/08/image.png" alt="" class="wp-image-6721" /></a></figure>
+
+
+
+<p class="wp-block-paragraph">Whether you want to check today’s <em>tithi</em>, track festival dates from anywhere in the world, or integrate Odia calendar data into your own applications:</p>
+
+
+
+<ul class="wp-block-list">
+<li><strong>Web Application:</strong><a href="https://odia-panchang.onrender.com/" rel="noopener">https://odia-panchang.onrender.com</a></li>
+
+
+
+<li><strong>API Endpoints:</strong></li>
+</ul>
+
+
+<div class="wp-block-code">
+	<div class="cm-editor">
+		<div class="cm-scroller">
+			
+<pre><code class="language-html"><div class="cm-line">GET /today</div><div class="cm-line">GET /panchang/2026-07-16?tradition=jagannath&amp;city=puri</div><div class="cm-line">GET /panchang/2026-07-16?tradition=biraja&amp;city=jajpur</div></code></pre>
+		</div>
+	</div>
+</div>
+
+
+<blockquote class="wp-block-quote is-layout-flow wp-block-quote-is-layout-flow">
+<p class="wp-block-paragraph"><em>Note: On free-tier hosting, the web service may require ~30 seconds to wake on initial load.</em></p>
+</blockquote>
+
+
+
+<p class="wp-block-paragraph"><strong>🙏 ଜୟ ଜଗନ୍ନାଥ</strong></p>
