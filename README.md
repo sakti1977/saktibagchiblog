@@ -34,3 +34,18 @@ Reports are in `reports/`. All 1,990 content/archive routes passed output and SE
 The Dockerfile builds the static site and runs server.mjs. Use a dedicated service connected to the confirmed repository and a temporary Railway domain. The default server sends noindex headers and a disallow robots.txt. Set both `SITE_LIVE=true` and `CUTOVER_VALIDATED=true` only after the cutover checklist is complete. Do not enable them on a preview.
 
 All media must be copied before the standalone production deployment. Do not assume a build means the migration is complete. Full WordPress export/backup reconciliation, subscriptions, memberships, forms, editor round-trip fidelity, private drafts and actual Railway validation remain launch gates. See CUTOVER.md.
+
+### Preview runtime port
+
+Both preview domains target port 3000. Set the Railway service variable `PORT=3000`
+explicitly; Railway injects PORT at runtime, overriding the Dockerfile default.
+On 2026-09-26, setting this variable restored HTTPS responses from 502 to 200
+without changing the server command or DNS. Startup logs now print the bound port.
+The earlier stopping-container messages corresponded to replaced deployments,
+not evidence that the current deployment had exited.
+
+After building, run `node scripts/verify-preview.mjs` to check all generated routes,
+asset bytes, legacy ID redirects, preview noindex headers and core endpoints.
+The default target is https://preview.saktibagchi.in; override with `PREVIEW_URL`.
+Results are written to `reports/preview-validation.json`. This checks deployed
+technical behavior; the remaining production release gates in CUTOVER.md still apply.

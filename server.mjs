@@ -30,5 +30,7 @@ http.createServer(async(req,res)=>{
     res.setHeader('Cache-Control',file.includes(`${path.sep}_astro${path.sep}`)?'public, max-age=31536000, immutable':'public, max-age=300');
     res.writeHead(200);res.end(req.method==='HEAD'?undefined:data);
   }catch{res.writeHead(404,{'Content-Type':'text/html; charset=utf-8'});res.end(await readFile(path.join(root,'404.html')).catch(()=>Buffer.from('Not found')));}
-}).listen(Number(process.env.PORT||3000),'0.0.0.0');
+}).listen(Number(process.env.PORT||3000),'0.0.0.0',()=>{
+  console.log(`Serving dist on 0.0.0.0:${process.env.PORT||3000} (preview=${!live})`);
+});
 
