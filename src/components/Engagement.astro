@@ -1,0 +1,19 @@
+---
+const {path}=Astro.props;
+---
+<section class="engagement" data-engagement data-path={path}>
+ <div class="engagement-bar"><button type="button" data-like>♡ Like <span data-like-count>0</span></button><span data-comment-count>Comments</span></div>
+ <div data-new-comments></div>
+ <form data-comment-form><h2>Leave a reflection</h2><p class="muted">Your email remains private. Comments appear after approval.</p><label>Name<input name="name" maxlength="80" required/></label><label>Email<input name="email" type="email" maxlength="254" required/></label><label class="comment-trap" aria-hidden="true">Website<input name="website" tabindex="-1" autocomplete="off"/></label><label>Comment<textarea name="body" maxlength="2000" rows="5" required></textarea></label><button class="button" type="submit">Submit comment</button><p data-comment-status aria-live="polite"></p></form>
+</section>
+<script>
+ const root=document.querySelector<HTMLElement>('[data-engagement]');
+ if(root){
+  const path=root.dataset.path;let visitor=localStorage.getItem('life-as-sakti-reader');if(!visitor){visitor=crypto.randomUUID();localStorage.setItem('life-as-sakti-reader',visitor);}
+  const escape=(value:string)=>{const element=document.createElement('div');element.textContent=value;return element.innerHTML;};
+  const load=async()=>{const response=await fetch('/api/engagement?path='+encodeURIComponent(path!));if(!response.ok)return;const data=await response.json();root.querySelector('[data-like-count]')!.textContent=data.likes;root.querySelector('[data-comment-count]')!.textContent=`${data.comments.length} new comment${data.comments.length===1?'':'s'}`;root.querySelector('[data-new-comments]')!.innerHTML=data.comments.map((c:any)=>`<article><h3>${escape(c.name)}</h3><time>${new Date(c.created_at).toLocaleDateString()}</time><p>${escape(c.body).replace(/\n/g,'<br>')}</p></article>`).join('');};
+  fetch('/api/view',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({path})}).catch(()=>{});load().catch(()=>{});
+  root.querySelector<HTMLButtonElement>('[data-like]')!.addEventListener('click',async event=>{const button=event.currentTarget as HTMLButtonElement;button.disabled=true;const response=await fetch('/api/like',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({path,visitor})});if(response.ok){const data=await response.json();button.textContent=`♥ Liked ${data.likes}`;}else button.disabled=false;});
+  root.querySelector<HTMLFormElement>('[data-comment-form]')!.addEventListener('submit',async event=>{event.preventDefault();const form=event.currentTarget as HTMLFormElement,status=form.querySelector<HTMLElement>('[data-comment-status]')!,data:any=Object.fromEntries(new FormData(form));data.path=path;status.textContent='Submitting…';const response=await fetch('/api/comments',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)});const result=await response.json();status.textContent=result.message||result.error;if(response.ok)form.reset();});
+ }
+</script>

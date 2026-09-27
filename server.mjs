@@ -1,36 +1,28 @@
 import http from 'node:http';
 import {readFile,stat} from 'node:fs/promises';
 import path from 'node:path';
+import crypto from 'node:crypto';
+import pg from 'pg';
 const root=path.resolve('dist');
 const types={'.html':'text/html; charset=utf-8','.css':'text/css','.js':'text/javascript','.json':'application/json','.xml':'application/xml','.txt':'text/plain','.jpg':'image/jpeg','.jpeg':'image/jpeg','.png':'image/png','.gif':'image/gif','.webp':'image/webp','.svg':'image/svg+xml','.pdf':'application/pdf','.wav':'audio/wav','.avif':'image/avif','.mp3':'audio/mpeg','.mp4':'video/mp4','.mov':'video/quicktime','.m4a':'audio/mp4','.ico':'image/x-icon'};
 const live=process.env.SITE_LIVE==='true';
 if(live&&process.env.CUTOVER_VALIDATED!=='true')throw Error('Production cutover has not been validated');
 const ids=JSON.parse(await readFile(path.join(root,'id-map.json'),'utf8'));
-http.createServer(async(req,res)=>{
-  res.setHeader('X-Content-Type-Options','nosniff');
-  res.setHeader('Referrer-Policy','strict-origin-when-cross-origin');
-  if(!live)res.setHeader('X-Robots-Tag','noindex, nofollow');
-  if(!['GET','HEAD'].includes(req.method)){res.writeHead(405);return res.end();}
-  try{
-    const url=new URL(req.url,'http://localhost');
-    if(url.pathname==='/health'){res.writeHead(200);return res.end('ok');}
-    if(url.pathname==='/robots.txt'){res.setHeader('Content-Type','text/plain');return res.end(live?'User-agent: *\nAllow: /\nSitemap: https://saktibagchi.in/sitemap.xml\n':'User-agent: *\nDisallow: /\n');}
-    const id=url.searchParams.get('p')||url.searchParams.get('page_id');
-    if(id&&ids[id]){res.writeHead(301,{Location:ids[id]});return res.end();}
-    let pathname=decodeURIComponent(url.pathname);
-    let file=path.resolve(root,'.'+pathname);
-    if(!file.startsWith(root+path.sep)&&file!==root){res.writeHead(403);return res.end();}
-    const info=await stat(file);
-    if(info.isDirectory()){
-      if(!pathname.endsWith('/')&&!pathname.endsWith('.html')){res.writeHead(301,{Location:url.pathname+'/'+url.search});return res.end();}
-      file=path.join(file,'index.html');
-    }
-    const data=await readFile(file);
-    res.setHeader('Content-Type',url.pathname==='/feed/'?'application/rss+xml; charset=utf-8':types[path.extname(file).toLowerCase()]||'application/octet-stream');
-    res.setHeader('Cache-Control',file.includes(`${path.sep}_astro${path.sep}`)?'public, max-age=31536000, immutable':'public, max-age=300');
-    res.writeHead(200);res.end(req.method==='HEAD'?undefined:data);
-  }catch{res.writeHead(404,{'Content-Type':'text/html; charset=utf-8'});res.end(await readFile(path.join(root,'404.html')).catch(()=>Buffer.from('Not found')));}
-}).listen(Number(process.env.PORT||3000),'0.0.0.0',()=>{
-  console.log(`Serving dist on 0.0.0.0:${process.env.PORT||3000} (preview=${!live})`);
-});
-
+const pool=process.env.DATABASE_URL?new pg.Pool({connectionString:process.env.DATABASE_URL,ssl:process.env.PGSSLMODE==='disable'?false:{rejectUnauthorized:false}}):null;
+const salt=process.env.ANALYTICS_SALT||'life-as-sakti-preview',adminPassword=process.env.ENGAGEMENT_ADMIN_PASSWORD||'';
+if(pool)await pool.query(`CREATE TABLE IF NOT EXISTS page_views(path text NOT NULL,visitor_hash text NOT NULL,viewed_on date NOT NULL DEFAULT CURRENT_DATE,hits integer NOT NULL DEFAULT 1,PRIMARY KEY(path,visitor_hash,viewed_on));CREATE TABLE IF NOT EXISTS article_likes(path text NOT NULL,visitor_hash text NOT NULL,created_at timestamptz NOT NULL DEFAULT now(),PRIMARY KEY(path,visitor_hash));CREATE TABLE IF NOT EXISTS article_comments(id bigserial PRIMARY KEY,path text NOT NULL,name varchar(80) NOT NULL,email varchar(254) NOT NULL,body varchar(2000) NOT NULL,status varchar(16) NOT NULL DEFAULT 'pending',created_at timestamptz NOT NULL DEFAULT now(),moderated_at timestamptz);CREATE INDEX IF NOT EXISTS article_comments_path_status ON article_comments(path,status,created_at)`);
+const json=(res,status,value)=>{res.writeHead(status,{'Content-Type':'application/json; charset=utf-8','Cache-Control':'no-store'});res.end(JSON.stringify(value));};
+const body=async req=>{let raw='';for await(const chunk of req){raw+=chunk;if(raw.length>12000)throw Error('Request too large');}return JSON.parse(raw||'{}');};
+const hash=value=>crypto.createHash('sha256').update(salt+'|'+value).digest('hex');
+const validPath=value=>typeof value==='string'&&/^\/\d{4}\/\d{2}\/\d{2}\/[a-z0-9%._~-]+\/$/i.test(value);
+const isAdmin=req=>{if(!adminPassword)return false;let supplied='';try{supplied=Buffer.from(String(req.headers.authorization||'').replace(/^Basic /,''),'base64').toString().split(':').slice(1).join(':');}catch{}const a=Buffer.from(supplied),b=Buffer.from(adminPassword);return a.length===b.length&&crypto.timingSafeEqual(a,b);};
+async function api(req,res,url){
+ if(!pool)return json(res,503,{error:'Reader engagement storage is being configured.'});
+ if(req.method==='POST'&&url.pathname==='/api/view'){const d=await body(req);if(!validPath(d.path))return json(res,400,{error:'Invalid article.'});const ip=String(req.headers['x-forwarded-for']||req.socket.remoteAddress||'').split(',')[0],v=hash(ip+'|'+String(req.headers['user-agent']||''));await pool.query('INSERT INTO page_views(path,visitor_hash) VALUES($1,$2) ON CONFLICT(path,visitor_hash,viewed_on) DO UPDATE SET hits=page_views.hits+1',[d.path,v]);return json(res,201,{ok:true});}
+ if(req.method==='GET'&&url.pathname==='/api/engagement'){const p=url.searchParams.get('path');if(!validPath(p))return json(res,400,{error:'Invalid article.'});const [l,c]=await Promise.all([pool.query('SELECT count(*)::int count FROM article_likes WHERE path=$1',[p]),pool.query("SELECT id,name,body,created_at FROM article_comments WHERE path=$1 AND status='approved' ORDER BY created_at",[p])]);return json(res,200,{likes:l.rows[0].count,comments:c.rows});}
+ if(req.method==='POST'&&url.pathname==='/api/like'){const d=await body(req);if(!validPath(d.path)||!/^[-a-z0-9]{16,80}$/i.test(d.visitor||''))return json(res,400,{error:'Invalid request.'});await pool.query('INSERT INTO article_likes(path,visitor_hash) VALUES($1,$2) ON CONFLICT DO NOTHING',[d.path,hash(d.visitor)]);const n=await pool.query('SELECT count(*)::int count FROM article_likes WHERE path=$1',[d.path]);return json(res,200,{likes:n.rows[0].count});}
+ if(req.method==='POST'&&url.pathname==='/api/comments'){const d=await body(req),name=String(d.name||'').trim(),email=String(d.email||'').trim(),message=String(d.body||'').trim();if(d.website)return json(res,201,{ok:true});if(!validPath(d.path)||name.length<2||name.length>80||!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)||message.length<2||message.length>2000)return json(res,400,{error:'Please check your name, email and comment.'});await pool.query('INSERT INTO article_comments(path,name,email,body) VALUES($1,$2,$3,$4)',[d.path,name,email,message]);return json(res,201,{ok:true,message:'Thank you. Your comment will appear after approval.'});}
+ if(url.pathname.startsWith('/api/admin/')){if(!isAdmin(req)){res.setHeader('WWW-Authenticate','Basic realm="Life as Sakti"');return json(res,401,{error:'Incorrect dashboard password.'});}if(req.method==='GET'&&url.pathname==='/api/admin/summary'){const [p,q,c]=await Promise.all([pool.query(`SELECT v.path,sum(v.hits)::int views,count(*)::int visitors,(SELECT count(*)::int FROM article_likes l WHERE l.path=v.path) likes FROM page_views v GROUP BY v.path ORDER BY views DESC LIMIT 100`),pool.query("SELECT id,path,name,email,body,created_at FROM article_comments WHERE status='pending' ORDER BY created_at"),pool.query("SELECT id,path,name,body,created_at FROM article_comments WHERE status='approved' ORDER BY created_at DESC LIMIT 30")]);return json(res,200,{pages:p.rows,pending:q.rows,recentComments:c.rows});}const m=url.pathname.match(/^\/api\/admin\/comments\/(\d+)\/(approve|delete)$/);if(req.method==='POST'&&m){if(m[2]==='approve')await pool.query("UPDATE article_comments SET status='approved',moderated_at=now() WHERE id=$1",[m[1]]);else await pool.query('DELETE FROM article_comments WHERE id=$1',[m[1]]);return json(res,200,{ok:true});}}
+ return json(res,404,{error:'Not found.'});
+}
+http.createServer(async(req,res)=>{res.setHeader('X-Content-Type-Options','nosniff');res.setHeader('Referrer-Policy','strict-origin-when-cross-origin');if(!live)res.setHeader('X-Robots-Tag','noindex, nofollow');try{const url=new URL(req.url,'http://localhost');if(url.pathname.startsWith('/api/'))return await api(req,res,url);if(!['GET','HEAD'].includes(req.method)){res.writeHead(405);return res.end();}if(url.pathname==='/health'){res.writeHead(200);return res.end('ok');}if(url.pathname==='/robots.txt'){res.setHeader('Content-Type','text/plain');return res.end(live?'User-agent: *\nAllow: /\nSitemap: https://saktibagchi.in/sitemap.xml\n':'User-agent: *\nDisallow: /\n');}const id=url.searchParams.get('p')||url.searchParams.get('page_id');if(id&&ids[id]){res.writeHead(301,{Location:ids[id]});return res.end();}let pathname=decodeURIComponent(url.pathname),file=path.resolve(root,'.'+pathname);if(!file.startsWith(root+path.sep)&&file!==root){res.writeHead(403);return res.end();}const info=await stat(file);if(info.isDirectory()){if(!pathname.endsWith('/')&&!pathname.endsWith('.html')){res.writeHead(301,{Location:url.pathname+'/'+url.search});return res.end();}file=path.join(file,'index.html');}const data=await readFile(file);res.setHeader('Content-Type',url.pathname==='/feed/'?'application/rss+xml; charset=utf-8':types[path.extname(file).toLowerCase()]||'application/octet-stream');res.setHeader('Cache-Control',file.includes(`${path.sep}_astro${path.sep}`)?'public, max-age=31536000, immutable':'public, max-age=300');res.writeHead(200);res.end(req.method==='HEAD'?undefined:data);}catch(error){console.error(error);res.writeHead(404,{'Content-Type':'text/html; charset=utf-8'});res.end(await readFile(path.join(root,'404.html')).catch(()=>Buffer.from('Not found')));}}).listen(Number(process.env.PORT||3000),'0.0.0.0',()=>console.log(`Serving dist on 0.0.0.0:${process.env.PORT||3000} (preview=${!live}, engagement=${Boolean(pool)})`));
