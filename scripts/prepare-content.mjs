@@ -11,6 +11,7 @@ const firstContentImage=html=>{
 const read=async f=>JSON.parse((await fs.readFile(f,'utf8')).replace(/^\uFEFF/,''));
 const entries=async folder=>Promise.all((await fs.readdir(folder)).filter(n=>n.endsWith('.json')).map(n=>read(path.join(folder,n))));
 const settings=await read('content/settings/site.json');
+const newsletterSite=(process.env.NEWSLETTER_SITE_URL||'https://preview.saktibagchi.in').replace(/\/$/,'');
 const tax=await read('content/settings/taxonomy.json');
 const records=[...await entries('content/posts'),...await entries('content/pages')].filter(p=>!p.draft);
 const used=new Set();
@@ -43,6 +44,6 @@ await fs.writeFile('src/data/site.json',JSON.stringify(data));
 await fs.writeFile('public/id-map.json',JSON.stringify(Object.fromEntries(records.filter(p=>p.id).map(p=>[p.id,p.path]))));
 const xml=s=>String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;');
 await fs.writeFile('public/sitemap.xml',`<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${['/',...routes.map(r=>r.path)].map(p=>`<url><loc>${xml('https://saktibagchi.in'+p)}</loc></url>`).join('')}</urlset>`);
-await fs.writeFile('public/feed/index.html',`<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"><channel><title>${xml(settings.title)}</title><link>https://saktibagchi.in/</link><description>${xml(settings.description)}</description>${posts.slice(0,30).map(p=>`<item><title>${xml(p.title)}</title><link>${xml(p.canonical)}</link><guid>${xml(p.canonical)}</guid><pubDate>${new Date(p.date).toUTCString()}</pubDate><description>${xml(p.description)}</description></item>`).join('')}</channel></rss>`);
+await fs.writeFile('public/feed/index.html',`<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"><channel><title>${xml(settings.title)}</title><link>${xml(newsletterSite)}/</link><description>${xml(settings.description)}</description>${posts.slice(0,30).map(p=>`<item><title>${xml(p.title)}</title><link>${xml(newsletterSite+p.path)}</link><guid>${xml(p.canonical)}</guid><pubDate>${new Date(p.date).toUTCString()}</pubDate><description>${xml(p.description)}</description></item>`).join('')}</channel></rss>`);
 console.log(`Prepared ${posts.length} published posts; drafts excluded from site, feeds, search and sitemap.`);
 
