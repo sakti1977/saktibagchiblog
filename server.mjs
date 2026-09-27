@@ -2,7 +2,7 @@ import http from 'node:http';
 import {readFile,stat} from 'node:fs/promises';
 import path from 'node:path';
 const root=path.resolve('dist');
-const types={'.html':'text/html; charset=utf-8','.css':'text/css','.js':'text/javascript','.json':'application/json','.xml':'application/xml','.txt':'text/plain','.jpg':'image/jpeg','.jpeg':'image/jpeg','.png':'image/png','.gif':'image/gif','.webp':'image/webp','.svg':'image/svg+xml','.pdf':'application/pdf','.wav':'audio/wav','.avif':'image/avif','.mp3':'audio/mpeg','.mp4':'video/mp4','.ico':'image/x-icon'};
+const types={'.html':'text/html; charset=utf-8','.css':'text/css','.js':'text/javascript','.json':'application/json','.xml':'application/xml','.txt':'text/plain','.jpg':'image/jpeg','.jpeg':'image/jpeg','.png':'image/png','.gif':'image/gif','.webp':'image/webp','.svg':'image/svg+xml','.pdf':'application/pdf','.wav':'audio/wav','.avif':'image/avif','.mp3':'audio/mpeg','.mp4':'video/mp4','.mov':'video/quicktime','.m4a':'audio/mp4','.ico':'image/x-icon'};
 const live=process.env.SITE_LIVE==='true';
 if(live&&process.env.CUTOVER_VALIDATED!=='true')throw Error('Production cutover has not been validated');
 const ids=JSON.parse(await readFile(path.join(root,'id-map.json'),'utf8'));
