@@ -4,6 +4,10 @@ import sanitize from 'sanitize-html';
 import {load} from 'cheerio';
 const plainCache=new Map();
 const plain=s=>{if(!plainCache.has(s))plainCache.set(s,load(s||'').text());return plainCache.get(s);};
+const firstContentImage=html=>{
+ const src=load(html||'')('img[src]').first().attr('src')?.trim();
+ return src&&/^(?:\/|https?:\/\/)/i.test(src)&&!src.startsWith('//')?src:'';
+};
 const read=async f=>JSON.parse((await fs.readFile(f,'utf8')).replace(/^\uFEFF/,''));
 const entries=async folder=>Promise.all((await fs.readdir(folder)).filter(n=>n.endsWith('.json')).map(n=>read(path.join(folder,n))));
 const settings=await read('content/settings/site.json');
@@ -21,6 +25,7 @@ for(const p of records){
  p.categories=tax.categories.filter(t=>p.categoryNames.includes(plain(t.name))).map(t=>t.id);p.tags=tax.tags.filter(t=>p.tagNames.includes(plain(t.name))).map(t=>t.id);
  p.description ||= p.title;p.seoTitle ||= p.title+' — Life as Sakti';
  p.html=sanitize(p.html||'',{allowedTags:sanitize.defaults.allowedTags.concat(['img','figure','figcaption','iframe','video','audio','source','details','summary']),allowedAttributes:{'*':['id','class'],a:['href','title','rel'],img:['src','alt','width','height','loading'],iframe:['src','title','width','height','allowfullscreen','loading'],video:['src','poster','controls','width','height'],audio:['src','controls'],source:['src','type'],td:['colspan','rowspan'],th:['colspan','rowspan']},allowedIframeHostnames:['www.youtube.com','www.youtube-nocookie.com','player.vimeo.com']});
+ p.image ||= firstContentImage(p.html);
 }
 const posts=records.filter(p=>p.kind==='post').sort((a,b)=>b.date.localeCompare(a.date));
 const routes=records.filter(p=>p.path!=='/');
