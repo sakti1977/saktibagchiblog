@@ -52,6 +52,7 @@ content:
       - name: html
         label: Article
         type: rich-text
+        required: true
         options:
           format: html
           switcher: true

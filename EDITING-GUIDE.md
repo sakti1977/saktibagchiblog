@@ -36,3 +36,11 @@ Reader comments were imported as read-only content. Email subscriptions, WordPre
 ## Recover an edit
 
 Use the repository's history to restore an earlier version, then let Railway rebuild. Never change an existing permalink merely to rename a post; change the title instead.
+
+## Writing desk and Explore
+
+Open `/manage/` on the preview site for writing and editing instructions and a title/date helper for new story addresses. It links to Pages CMS; sign in with your GitHub account and choose this repository. The website footer also links to the writing desk. New stories do not require a WordPress ID. Keep original addresses unchanged when editing.
+
+The Explore page is an editable entry in Website pages (`content/pages/explore.json`). It gathers seven public GitHub projects and ten recent Medium stories. Medium entries link to their original publication; they are not full-text imports. Use an original manuscript or Medium export before republishing member-only stories in full.
+
+The automated editor checks cover drafts, publishing, rich-text sanitization, topics, duplicate addresses and creating stories without old WordPress IDs. Browser sign-in and rich-text round-trip approval still require the owner’s authenticated session.
